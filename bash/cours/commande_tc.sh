@@ -12,3 +12,11 @@ sudo tc qdisc add dev ens33 root netem delay 100ms 10ms
 
 
 sudo tc qdisc change dev ens33 root netem delay 200ms 200ms
+
+
+# Perte et corruption de packet
+sudo tc qdisc add dev ens33 root netem loss 10%
+
+sudo tc qdisc add dev ens33 root netem corrupt 10%
+
+sudo tc qdisc add dev ens33 root netem duplicate 10%
