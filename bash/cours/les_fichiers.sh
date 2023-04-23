@@ -6,7 +6,6 @@ for element in $list; do
     echo "$element" >> toto.txt
 done
 
-
 #2) Lecture d'un fichier
     #- La redirection
 list=$(<toto.txt)
@@ -22,7 +21,7 @@ done
 
 #3) Lecture ligne a ligne
 cpt=1
-while read LINE; do
+while read -r LINE; do
     echo $cpt ":" "$LINE"
     let cpt++
 done < toto3.txt
