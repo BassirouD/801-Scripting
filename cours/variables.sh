@@ -1,5 +1,6 @@
 #!/bin/bash
 
+#Les variables simples
 var1="Bonjour les amis"
 echo "$var1"
 
