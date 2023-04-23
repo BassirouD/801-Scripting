@@ -1,9 +1,21 @@
 #!/bin/bash
 
+if [ $# -le 3 ]; then
+    echo "Au moins 4 arguments"
+    exit 1
+fi
+
+echo "Les paramétres sont: "
+for variable in $*; do
+    echo "$variable"
+done
+
 if [ $# -ne 1 ]; then
     echo usage "$0" repertoire
     exit 1
 fi
+
+#*******************************************************
 
 for f in $(ls $1); do
     if [ -f "$1/$f" ]; then
@@ -13,3 +25,4 @@ for f in $(ls $1); do
     fi
 done
 exit 0
+#*******************************************************
