@@ -14,5 +14,5 @@ r = requests.get('https://192.168.189.129:8443/1.0/containers/myalpine',
                  cert=('lxd.crt', 'lxd.key'), verify=False)
 print(r.status_code)
 print(r.text)
-print(r.json()['metadata']['expanded_divices']['eth0']['parent'])
+print(r.json()['metadata']['expanded_devices']['eth0']['parent'])
 
