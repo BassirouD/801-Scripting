@@ -1,0 +1,20 @@
+========================Initialisation de lxd===================
+==>lxd init
+
+LXD clustering: no
+new storage pool: yes
+name of the new storage pool: default
+name of the storage backend: dir
+MAAS server: no
+network bridge: yes
+called new bridge: lxdbrO
+IPV4: auto
+LXD available over the network  
+Address to bind LXD: all
+Port to bind LXD: 8443
+password.......
+stale cached image: yes
+YAML: non
+
+====================Création alpine==================
+==>lxc launch images:alpine/3.14 myalpine
