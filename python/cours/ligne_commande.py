@@ -6,6 +6,7 @@ import filecmp
 import subprocess
 import re
 import zipfile
+import syslog
 
 # Récup des arguments donnés en parametre
 print("Nombre d'argument {}".format(len(sys.argv)))
@@ -119,35 +120,42 @@ print("{} trouvé dans l'expressions {} \n entre {} et {} ({})".format(
 
 # Découpage avec la méthode split()
 print('-------------------Découpage avec la méthode split-----------------------')
-text='Bonjour;à;tout;le;monde'
-tab=text.split(';')
+text = 'Bonjour;à;tout;le;monde'
+tab = text.split(';')
 for element in tab:
     print('--------->{}'.format(element))
 
 # Remplacement avec la méthode sub()
 print('-------------------Remplacement avec la méthode sub-----------------------')
-text='bonjour;à;tous'
-text2=re.sub(';','----',text)
-print('Remplacement {} devient {}'.format(text,text2))
-
+text = 'bonjour;à;tous'
+text2 = re.sub(';', '----', text)
+print('Remplacement {} devient {}'.format(text, text2))
 
 
 # Compression de fichier avec la biblio zipfile
 print('-------------------Compression de fichier avec la biblio zipfile-----------------------')
 for element in ['mdp.txt,' 'toto.txt', 'toto2.txt', 'myzip.zip']:
     print('{:>15} {}'.format(element, zipfile.is_zipfile(element)))
-    
+
 # Creation de l'archive
 print('Creation dune archive')
-zipf=zipfile.ZipFile('myzip.zip','w')
+zipf = zipfile.ZipFile('myzip.zip', 'w')
 zipf.write('mdp.txt')
 zipf.write('toto.txt')
 zipf.close()
 
 # Extraction dune archive
 print('Extraction dune archive')
-zipf=zipfile.ZipFile('myzip.zip','r')
+zipf = zipfile.ZipFile('myzip.zip', 'r')
 zipf.extractall('extract')
 zipf.close()
+
+
+# Les logs
+print('-------------------Les logs-----------------------')
+syslog.openlog(ident='toto', logoption=syslog.LOG_PID,
+               facility=syslog.LOG_AUTH)
+syslog.syslog(priority=syslog.LOG_INFO, message='Utilisateur identifié')
+syslog.closelog()
 
 exit(0)
