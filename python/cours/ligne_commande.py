@@ -7,6 +7,7 @@ import subprocess
 import re
 import zipfile
 import syslog
+import paramiko
 
 # Récup des arguments donnés en parametre
 print("Nombre d'argument {}".format(len(sys.argv)))
@@ -155,7 +156,20 @@ zipf.close()
 print('-------------------Les logs-----------------------')
 syslog.openlog(ident='toto', logoption=syslog.LOG_PID,
                facility=syslog.LOG_AUTH)
-syslog.syslog(priority=syslog.LOG_INFO, message='Utilisateur identifié')
+# syslog.syslog(priority=syslog.LOG_INFO, message='Utilisateur identifié')
 syslog.closelog()
+
+
+# SSH
+print('-------------------SSH-----------------------')
+ssh = paramiko.SSHClient()
+ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+ssh.connect('192.168.189.129', username='diallo', password='toor')
+stdin, stdout, stderr = ssh.exec_command('ls /etc/')
+for result in stdout.readlines():
+    print(result)
+
+ssh.close()
+
 
 exit(0)
