@@ -4,6 +4,7 @@ import os
 import shutil
 import filecmp
 import subprocess
+import re
 
 # Récup des arguments donnés en parametre
 print("Nombre d'argument {}".format(len(sys.argv)))
@@ -82,26 +83,37 @@ print(p.communicate())
 # Avec la methode RUN
 print('*************************************')
 
-res = subprocess.run(['ls','-l'])
+res = subprocess.run(['ls', '-l'])
 print('res: ', res.returncode)
 print('_____________avec shell _____________')
-res = subprocess.run(['ls','-l'], shell=True)
+res = subprocess.run(['ls', '-l'], shell=True)
 print('res: ', res.returncode)
 
 try:
     print('------------------avec check---------------------')
-    res=subprocess.run('ls -l', shell=True, check=True)
+    res = subprocess.run('ls -l', shell=True, check=True)
     print('res: ', res.returncode)
 except subprocess.CalledProcessError as err:
-    print('Error: ',err)
+    print('Error: ', err)
     exit(1)
 
 print('------------------avec stdout---------------------')
-res=subprocess.run(['ls', '-al'], stdout=subprocess.PIPE)
+res = subprocess.run(['ls', '-al'], stdout=subprocess.PIPE)
 print('res: ', res.returncode)
 print('Il ya {} octects dans la sorties standard'.format(len(res.stdout)))
-out=res.stdout.decode('utf-8')
+out = res.stdout.decode('utf-8')
 print('out:', out)
+
+# The regular expression
+print('-------------------Les expressions régulières-----------------------')
+pattern = 'RT0801'
+text = 'Chapitre 2 - RT0801 : expressions régulières...'
+match = re.search(pattern, text)
+s = match.start()
+e = match.end()
+
+print("{} trouvé dans l'expressions {} \n entre {} et {} ({})".format(
+    match.re.pattern, match.string, s, e, text[s:e]))
 
 
 exit(0)
