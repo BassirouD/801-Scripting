@@ -5,6 +5,7 @@ import shutil
 import filecmp
 import subprocess
 import re
+import zipfile
 
 # Récup des arguments donnés en parametre
 print("Nombre d'argument {}".format(len(sys.argv)))
@@ -128,5 +129,25 @@ print('-------------------Remplacement avec la méthode sub---------------------
 text='bonjour;à;tous'
 text2=re.sub(';','----',text)
 print('Remplacement {} devient {}'.format(text,text2))
+
+
+
+# Compression de fichier avec la biblio zipfile
+print('-------------------Compression de fichier avec la biblio zipfile-----------------------')
+for element in ['mdp.txt,' 'toto.txt', 'toto2.txt', 'myzip.zip']:
+    print('{:>15} {}'.format(element, zipfile.is_zipfile(element)))
+    
+# Creation de l'archive
+print('Creation dune archive')
+zipf=zipfile.ZipFile('myzip.zip','w')
+zipf.write('mdp.txt')
+zipf.write('toto.txt')
+zipf.close()
+
+# Extraction dune archive
+print('Extraction dune archive')
+zipf=zipfile.ZipFile('myzip.zip','r')
+zipf.extractall('extract')
+zipf.close()
 
 exit(0)
