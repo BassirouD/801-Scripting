@@ -75,8 +75,33 @@ try:
 except Exception as e:
     print(f'Une exception sest produite {e}')
 
-p=subprocess.Popen(['ls', '-al'], stdout=subprocess.PIPE)
+p = subprocess.Popen(['ls', '-al'], stdout=subprocess.PIPE)
 print("=======================================================")
 print(p.communicate())
+
+# Avec la methode RUN
+print('*************************************')
+
+res = subprocess.run(['ls','-l'])
+print('res: ', res.returncode)
+print('_____________avec shell _____________')
+res = subprocess.run(['ls','-l'], shell=True)
+print('res: ', res.returncode)
+
+try:
+    print('------------------avec check---------------------')
+    res=subprocess.run('ls -l', shell=True, check=True)
+    print('res: ', res.returncode)
+except subprocess.CalledProcessError as err:
+    print('Error: ',err)
+    exit(1)
+
+print('------------------avec stdout---------------------')
+res=subprocess.run(['ls', '-al'], stdout=subprocess.PIPE)
+print('res: ', res.returncode)
+print('Il ya {} octects dans la sorties standard'.format(len(res.stdout)))
+out=res.stdout.decode('utf-8')
+print('out:', out)
+
 
 exit(0)
