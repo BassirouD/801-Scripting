@@ -116,4 +116,17 @@ print("{} trouvé dans l'expressions {} \n entre {} et {} ({})".format(
     match.re.pattern, match.string, s, e, text[s:e]))
 
 
+# Découpage avec la méthode split()
+print('-------------------Découpage avec la méthode split-----------------------')
+text='Bonjour;à;tout;le;monde'
+tab=text.split(';')
+for element in tab:
+    print('--------->{}'.format(element))
+
+# Remplacement avec la méthode sub()
+print('-------------------Remplacement avec la méthode sub-----------------------')
+text='bonjour;à;tous'
+text2=re.sub(';','----',text)
+print('Remplacement {} devient {}'.format(text,text2))
+
 exit(0)
