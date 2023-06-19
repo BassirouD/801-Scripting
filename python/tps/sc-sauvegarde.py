@@ -9,7 +9,7 @@ password = sys.argv[3]
 archive_name = sys.argv[4]
 folder_to_save_name = sys.argv[5]
 
-if len(sys.argv) == 5:
+if len(sys.argv) == 6:
     print('Tous les paramètres sont présent...')
 else:
     print('Paramètres manquants')

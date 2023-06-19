@@ -12,13 +12,13 @@ login=$4
 password=$5
 
 
-tar -cvf $archive_name $folder_to_save_name
+tar -cvf "$archive_name" "$folder_to_save_name"
 
 if [ $? -ne 0 ]; then
     echo "L'archive a échoué"
 fi
 
-sshpass -p $password sftp $login@$addr_server << FINSFTP
+sshpass -p "$password" sftp "$login@$addr_server" << FINSFTP
 
 put $archive_name
 exit
