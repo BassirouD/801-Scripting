@@ -18,9 +18,9 @@ else:
 archive = subprocess.run(['tar', '-cvf', archive_name, folder_to_save_name])
 print(archive)
 
-with pysftp.Connection(host=host, username=username,password=password) as sftp:
+with pysftp.Connection(host=host, username=username, password=password) as sftp:
     print('Connection établie....')
-    sftp.put(folder_to_save_name, archive_name)
+    sftp.put(archive_name)
     print("Le fichier a été uploadé avec succès")
 
 exit(0)
